@@ -4,17 +4,13 @@ import { useEffect, useState } from "react";
 import { 
   Users, 
   Search, 
-  Filter, 
   Plus, 
   Heart, 
   Phone, 
-  Mail,
   Pencil,
   Trash2,
-  Calendar,
   ShieldCheck,
   Building2,
-  MessageSquare
 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -23,7 +19,6 @@ import { Badge } from "@/components/ui/badge";
 import { EntityModal } from "@/components/shared/entity-modal";
 import { VolunteerForm } from "@/components/forms/volunteer-form";
 import { PageHeader } from "@/components/shared/page-header";
-import { formatDate } from "@/utils/format";
 import { cn } from "@/utils/cn";
 import { toast } from "sonner";
 import { DeleteConfirmationModal } from "@/components/shared/delete-confirmation-modal";
@@ -45,21 +40,21 @@ export function VolunteersView() {
   const [selectedDept, setSelectedDept] = useState("All");
   const [deleteId, setDeleteId] = useState<number | null>(null);
 
-  const fetchVolunteers = async () => {
+  const fetchVolunteers = React.useCallback(async () => {
     try {
       setLoading(true);
       const { data } = await api.get("/volunteers");
       setVolunteers(data);
-    } catch (error) {
+    } catch (_error) {
       toast.error("Failed to fetch volunteers");
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchVolunteers();
-  }, []);
+  }, [fetchVolunteers]);
 
   const departments = ["All", ...Array.from(new Set(volunteers.map(v => v.department)))];
   
@@ -78,7 +73,7 @@ export function VolunteersView() {
       await api.delete(`/volunteers/${deleteId}`);
       toast.success("Volunteer record removed");
       fetchVolunteers();
-    } catch (error) {
+    } catch (_error) {
       toast.error("Delete failed");
     } finally {
       setDeleteId(null);

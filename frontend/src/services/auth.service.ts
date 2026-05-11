@@ -23,7 +23,7 @@ export async function login(payload: LoginPayload): Promise<AuthSession> {
       id: data.username,
       name: data.username,
       email: data.username,
-      role: data.role.replace("ROLE_", "") as any,
+      role: data.role.replace("ROLE_", "") as AuthSession["user"]["role"],
     },
   };
 }

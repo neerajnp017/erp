@@ -49,7 +49,7 @@ export function ExpensesView() {
   const [filterMonth, setFilterMonth] = useState(new Date().getMonth() + 1);
   const [auditRange, setAuditRange] = useState({ start: "", end: "" });
 
-  const fetchItems = async () => {
+  const fetchItems = React.useCallback(async () => {
     setLoading(true);
     try {
       const { data } = await api.get("/expenses", {
@@ -59,16 +59,16 @@ export function ExpensesView() {
         }
       });
       setItems(data);
-    } catch (error) {
+    } catch (_error) {
       toast.error("Failed to fetch expenses");
     } finally {
       setLoading(false);
     }
-  };
+  }, [filterYear, filterMonth]);
 
   useEffect(() => {
     fetchItems();
-  }, [filterYear, filterMonth]);
+  }, [fetchItems]);
 
   const categories = Array.from(new Set(items.map(i => i.category || "General")));
   
@@ -116,7 +116,7 @@ export function ExpensesView() {
       });
       downloadCSV(data, `Expense_Report_${new Date().toISOString().split("T")[0]}`);
       toast.success("Report downloaded successfully");
-    } catch (error) {
+    } catch (_error) {
       toast.error("Export failed");
     }
   };
@@ -127,7 +127,7 @@ export function ExpensesView() {
       await api.delete(`/expenses/${deleteId}`);
       toast.success("Expense removed");
       fetchItems();
-    } catch (error) {
+    } catch (_error) {
       toast.error("Delete failed");
     } finally {
       setDeleteId(null);
@@ -140,7 +140,7 @@ export function ExpensesView() {
       await api.delete(`/expenses/category/${catDeleteName}`);
       toast.success(`Category '${catDeleteName}' and all its entries removed`);
       fetchItems();
-    } catch (error) {
+    } catch (_error) {
       toast.error("Delete category failed");
     } finally {
       setCatDeleteName(null);
@@ -154,7 +154,7 @@ export function ExpensesView() {
       });
       toast.success("Category renamed");
       fetchItems();
-    } catch (error) {
+    } catch (_error) {
       toast.error("Rename failed");
     }
   };
