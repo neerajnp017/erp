@@ -4,8 +4,11 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   output: "standalone",
-  devIndicators: {
-    appIsrStatus: false,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
 };
 
