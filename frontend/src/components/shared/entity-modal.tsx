@@ -10,7 +10,7 @@ export function EntityModal({
 }: {
   trigger: React.ReactNode;
   title: string;
-  description: string;
+  description?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -19,7 +19,7 @@ export function EntityModal({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
+          {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
         <div className="mt-5">{children}</div>
       </DialogContent>

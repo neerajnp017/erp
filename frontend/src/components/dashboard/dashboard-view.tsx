@@ -357,6 +357,7 @@ export function DashboardView() {
                         </Button>
                       }
                       title="Update Collection Goal"
+                      description="Set a new financial target for the current period."
                     >
                       <form 
                         onSubmit={async (e) => {
