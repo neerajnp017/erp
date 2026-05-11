@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/donations")
-@CrossOrigin(origins = "*")
+// @CrossOrigin(origins = "*")
 public class DonationController {
 
     @Autowired

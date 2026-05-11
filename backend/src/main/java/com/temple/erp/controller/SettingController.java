@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/settings")
-@CrossOrigin(origins = "*")
+// @CrossOrigin(origins = "*")
 public class SettingController {
 
     @Autowired

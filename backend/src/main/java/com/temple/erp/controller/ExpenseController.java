@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/expenses")
-@CrossOrigin(origins = "*")
+// @CrossOrigin(origins = "*")
 public class ExpenseController {
 
     @Autowired
@@ -19,8 +19,7 @@ public class ExpenseController {
             @RequestParam(required = false) Integer year,
             @RequestParam(required = false) Integer month,
             @RequestParam(required = false) String startDate,
-            @RequestParam(required = false) String endDate
-    ) {
+            @RequestParam(required = false) String endDate) {
         return expenseService.getAllExpenses(year, month, startDate, endDate);
     }
 

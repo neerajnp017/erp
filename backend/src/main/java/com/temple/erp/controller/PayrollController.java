@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/payroll")
-@CrossOrigin(origins = "*") // For development
+// @CrossOrigin(origins = "*") // For development
 public class PayrollController {
 
     @Autowired

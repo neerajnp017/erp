@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/festivals")
-@CrossOrigin(origins = "*")
+// @CrossOrigin(origins = "*")
 public class FestivalController {
 
     @Autowired
@@ -33,12 +33,14 @@ public class FestivalController {
     }
 
     @PostMapping("/{id}/departments")
-    public com.temple.erp.model.FestivalDepartment addDepartment(@PathVariable Long id, @RequestBody com.temple.erp.model.FestivalDepartment department) {
+    public com.temple.erp.model.FestivalDepartment addDepartment(@PathVariable Long id,
+            @RequestBody com.temple.erp.model.FestivalDepartment department) {
         return festivalService.addDepartment(id, department);
     }
 
     @PutMapping("/departments/{id}")
-    public com.temple.erp.model.FestivalDepartment updateDepartment(@PathVariable Long id, @RequestBody com.temple.erp.model.FestivalDepartment department) {
+    public com.temple.erp.model.FestivalDepartment updateDepartment(@PathVariable Long id,
+            @RequestBody com.temple.erp.model.FestivalDepartment department) {
         return festivalService.updateDepartment(id, department);
     }
 
@@ -48,12 +50,14 @@ public class FestivalController {
     }
 
     @PostMapping("/departments/{deptId}/expenses")
-    public com.temple.erp.model.FestivalExpense addExpense(@PathVariable Long deptId, @RequestBody com.temple.erp.model.FestivalExpense expense) {
+    public com.temple.erp.model.FestivalExpense addExpense(@PathVariable Long deptId,
+            @RequestBody com.temple.erp.model.FestivalExpense expense) {
         return festivalService.addExpense(deptId, expense);
     }
 
     @PutMapping("/expenses/{id}")
-    public com.temple.erp.model.FestivalExpense updateExpense(@PathVariable Long id, @RequestBody com.temple.erp.model.FestivalExpense expense) {
+    public com.temple.erp.model.FestivalExpense updateExpense(@PathVariable Long id,
+            @RequestBody com.temple.erp.model.FestivalExpense expense) {
         return festivalService.updateExpense(id, expense);
     }
 

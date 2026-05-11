@@ -8,7 +8,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/dashboard")
-@CrossOrigin(origins = "*")
+// @CrossOrigin(origins = "*")
 public class DashboardController {
 
     @Autowired
@@ -17,8 +17,7 @@ public class DashboardController {
     @GetMapping("/summary")
     public Map<String, Object> getSummary(
             @RequestParam(required = false) Integer year,
-            @RequestParam(required = false) Integer month
-    ) {
+            @RequestParam(required = false) Integer month) {
         return dashboardService.getSummary(year, month);
     }
 }
