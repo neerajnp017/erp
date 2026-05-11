@@ -66,15 +66,41 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 
+    // @Bean
+    // public CorsConfigurationSource corsConfigurationSource() {
+    // CorsConfiguration configuration = new CorsConfiguration();
+    // configuration.setAllowedOrigins(List.of("https://erp-one-tawny.vercel.app"));
+    // configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE",
+    // "OPTIONS"));
+    // configuration.setAllowedHeaders(List.of("*"));
+    // configuration.setAllowCredentials(true);
+    // UrlBasedCorsConfigurationSource source = new
+    // UrlBasedCorsConfigurationSource();
+    // source.registerCorsConfiguration("/**", configuration);
+    // return source;
+    // }
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+
+        // 1. MUST be the specific Vercel URL (NO asterisk *, NO trailing slash /)
         configuration.setAllowedOrigins(List.of("https://erp-one-tawny.vercel.app"));
+
+        // 2. Methods allowed
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("*"));
+
+        // 3. Headers allowed - be specific to avoid "special value" errors
+        configuration
+                .setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Requested-With", "Accept", "Origin"));
+
+        // 4. Must be true for JWT/Sessions
         configuration.setAllowCredentials(true);
+
+        // 5. Expose headers so the frontend can read the token if needed
+        configuration.setExposedHeaders(List.of("Authorization"));
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/**", configuration); // Applies to ALL paths including /api/donations
         return source;
     }
 }
