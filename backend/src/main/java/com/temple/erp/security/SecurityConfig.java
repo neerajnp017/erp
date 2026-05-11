@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll() // Allow all
                                                                                                          // Preflights
-                        .requestMatchers("/api/auth/**", "/auth/**", "/error", "/h2-console/**").permitAll()
+                        .requestMatchers("/api/auth/**", "/api/public/**", "/auth/**", "/error", "/h2-console/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
