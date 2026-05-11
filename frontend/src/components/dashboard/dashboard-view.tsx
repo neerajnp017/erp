@@ -17,7 +17,7 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { EntityModal } from "@/components/shared/entity-modal";
+
 import { toast } from "sonner";
 import { formatCurrency } from "@/utils/format";
 import { cn } from "@/utils/cn";
@@ -350,44 +350,10 @@ export function DashboardView() {
                             <div className="h-full bg-emerald-600 rounded-full transition-all duration-1000" style={{width: `${progressPercent}%`}} />
                         </div>
                     </div>
-                    <EntityModal
-                      trigger={
-                        <Button className="w-full h-12 rounded-2xl bg-emerald-950 hover:bg-black text-white font-bold text-sm transition-all group">
-                            Update Targets <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                        </Button>
-                      }
-                      title="Update Collection Goal"
-                      description="Set a new financial target for the current period."
-                    >
-                      <form 
-                        onSubmit={async (e) => {
-                          e.preventDefault();
-                          const val = new FormData(e.currentTarget).get("target");
-                          try {
-                            await api.post("/settings", { keyName: "collection_target", settingValue: val });
-                            setGoalTarget(Number(val));
-                            toast.success("Collection target updated!");
-                          } catch {
-                            toast.error("Failed to update target");
-                          }
-                        }}
-                        className="space-y-6 pt-4"
-                      >
-                        <div className="space-y-2">
-                          <label className="text-xs font-black uppercase text-emerald-900/60">New Target Amount (₹)</label>
-                          <input 
-                            name="target"
-                            type="number" 
-                            defaultValue={goalTarget}
-                            className="w-full h-14 rounded-xl bg-emerald-50 border-none px-4 text-xl font-bold outline-none focus:ring-2 focus:ring-emerald-500"
-                          />
-                        </div>
-                        <Button type="submit" className="w-full h-12 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold">
-                          Save New Target
-                        </Button>
-                        <p className="text-xs text-emerald-900/40 italic text-center">This will update the progress trackers for your current session.</p>
-                      </form>
-                    </EntityModal>
+                    <Button disabled className="w-full h-12 rounded-2xl bg-emerald-100 text-emerald-400 font-bold text-sm transition-all cursor-not-allowed">
+                        Update Targets (Coming Soon)
+                    </Button>
+
                 </div>
              </div>
           </CardContent>

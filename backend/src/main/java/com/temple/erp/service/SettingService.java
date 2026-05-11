@@ -5,6 +5,7 @@ import com.temple.erp.repository.SettingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,6 +16,10 @@ public class SettingService {
 
     public Setting getSetting(String keyName) {
         return repository.findByKeyName(keyName).orElse(new Setting(null, keyName, ""));
+    }
+
+    public List<Setting> getAllSettings() {
+        return repository.findAll();
     }
 
     public Setting saveSetting(Setting setting) {

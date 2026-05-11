@@ -15,7 +15,7 @@ export const routePermissions: Record<string, Role[]> = {
   "/donations": ["SUPER_ADMIN", "TRUSTEE", "ACCOUNTANT", "MANAGER"],
   "/inventory": ["SUPER_ADMIN", "TRUSTEE", "MANAGER", "VOLUNTEER"],
   "/expenses": ["SUPER_ADMIN", "TRUSTEE", "ACCOUNTANT"],
-  "/payroll": ["SUPER_ADMIN", "TRUSTEE", "ACCOUNTANT", "MANAGER"],
+  "/payroll": ["SUPER_ADMIN"],
   "/festivals": ["SUPER_ADMIN", "TRUSTEE", "MANAGER", "VOLUNTEER"],
   "/kitchen": ["SUPER_ADMIN", "MANAGER", "VOLUNTEER"],
   "/volunteers": ["SUPER_ADMIN", "TRUSTEE", "MANAGER"],

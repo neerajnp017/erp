@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { 
   ReceiptText, 
   Plus, 
@@ -49,7 +49,7 @@ export function ExpensesView() {
   const [filterMonth, setFilterMonth] = useState(new Date().getMonth() + 1);
   const [auditRange, setAuditRange] = useState({ start: "", end: "" });
 
-  const fetchItems = React.useCallback(async () => {
+  const fetchItems = useCallback(async () => {
     setLoading(true);
     try {
       const { data } = await api.get("/expenses", {

@@ -55,7 +55,14 @@ public class AuthController {
         User user = new User();
         user.setUsername(authRequest.getUsername());
         user.setPassword(passwordEncoder.encode(authRequest.getPassword()));
-        user.setRole("ROLE_ADMIN");
+        
+        // Use provided role or default to SUPER_ADMIN
+        String requestedRole = authRequest.getRole();
+        if (requestedRole == null || requestedRole.isEmpty()) {
+            user.setRole("SUPER_ADMIN");
+        } else {
+            user.setRole(requestedRole);
+        }
 
         userRepository.save(user);
 

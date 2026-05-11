@@ -13,6 +13,11 @@ public class SettingController {
     @Autowired
     private SettingService settingService;
 
+    @GetMapping
+    public java.util.List<Setting> getAllSettings() {
+        return settingService.getAllSettings();
+    }
+
     @GetMapping("/{keyName}")
     public Setting getSetting(@PathVariable String keyName) {
         return settingService.getSetting(keyName);

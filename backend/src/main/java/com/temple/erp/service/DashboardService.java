@@ -44,8 +44,12 @@ public class DashboardService {
                 .collect(Collectors.toList());
         }
         
-        double totalDonations = donations.stream().mapToDouble(Donation::getAmount).sum();
-        double totalExpenses = expenses.stream().mapToDouble(Expense::getAmount).sum();
+        double totalDonations = donations.stream()
+            .mapToDouble(d -> d.getAmount() != null ? d.getAmount() : 0.0)
+            .sum();
+        double totalExpenses = expenses.stream()
+            .mapToDouble(e -> e.getAmount() != null ? e.getAmount() : 0.0)
+            .sum();
         long volunteerCount = volunteerRepository.count();
         double totalPayroll = payrollRepository.findAll().stream()
             .mapToDouble(p -> p.getAmount() != null ? p.getAmount() : 0.0)
@@ -61,6 +65,7 @@ public class DashboardService {
         
         // Add recent activity (last 5 donations)
         List<Map<String, Object>> recent = donations.stream()
+            .filter(d -> d.getDate() != null)
             .sorted(Comparator.comparing(Donation::getDate).reversed())
             .limit(5)
             .map(d -> {
@@ -85,14 +90,14 @@ public class DashboardService {
             .filter(d -> d.getDate() != null)
             .collect(Collectors.groupingBy(
                 d -> months[d.getDate().getMonthValue() - 1],
-                Collectors.summingDouble(Donation::getAmount)
+                Collectors.summingDouble(d -> d.getAmount() != null ? d.getAmount() : 0.0)
             ));
 
         Map<String, Double> expByMonth = expenses.stream()
             .filter(e -> e.getDate() != null)
             .collect(Collectors.groupingBy(
                 e -> months[e.getDate().getMonthValue() - 1],
-                Collectors.summingDouble(Expense::getAmount)
+                Collectors.summingDouble(e -> e.getAmount() != null ? e.getAmount() : 0.0)
             ));
 
         String[] recentMonths = {"Jan", "Feb", "Mar", "Apr", "May"};
@@ -108,7 +113,10 @@ public class DashboardService {
 
     private List<Map<String, Object>> getDonationMix(List<Donation> donations) {
         Map<String, Double> sums = donations.stream()
-            .collect(Collectors.groupingBy(Donation::getCategory, Collectors.summingDouble(Donation::getAmount)));
+            .collect(Collectors.groupingBy(
+                d -> d.getCategory() != null ? d.getCategory() : "Uncategorized", 
+                Collectors.summingDouble(d -> d.getAmount() != null ? d.getAmount() : 0.0)
+            ));
             
         List<Map<String, Object>> mix = new ArrayList<>();
         sums.forEach((cat, sum) -> {

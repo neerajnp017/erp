@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { 
   Users, 
   Search, 
@@ -40,7 +40,7 @@ export function VolunteersView() {
   const [selectedDept, setSelectedDept] = useState("All");
   const [deleteId, setDeleteId] = useState<number | null>(null);
 
-  const fetchVolunteers = React.useCallback(async () => {
+  const fetchVolunteers = useCallback(async () => {
     try {
       setLoading(true);
       const { data } = await api.get("/volunteers");

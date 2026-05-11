@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DonationRepository extends JpaRepository<Donation, Long> {
+    java.util.List<Donation> findByDonorNameContainingIgnoreCase(String donorName);
 }

@@ -84,7 +84,10 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // 1. MUST be the specific Vercel URL (NO asterisk *, NO trailing slash /)
-        configuration.setAllowedOrigins(List.of("https://erp-one-tawny.vercel.app"));
+        configuration.setAllowedOrigins(List.of(
+                "https://erp-one-tawny.vercel.app",
+                "http://localhost:3000"
+        ));
 
         // 2. Methods allowed
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));

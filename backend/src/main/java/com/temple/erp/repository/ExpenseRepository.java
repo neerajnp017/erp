@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
+    java.util.List<Expense> findByDescriptionContainingIgnoreCase(String description);
 }

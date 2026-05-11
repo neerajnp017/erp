@@ -25,5 +25,5 @@ export const navigationItems: NavItem[] = [
   { title: "Volunteers", href: "/volunteers", icon: Users, roles: routePermissions["/volunteers"] },
   { title: "Reports", href: "/reports", icon: BarChart3, roles: routePermissions["/reports"], disabled: true },
   { title: "User Management", href: "/users", icon: UserCog, roles: routePermissions["/users"], disabled: true },
-  { title: "Settings", href: "/settings", icon: Settings, roles: routePermissions["/settings"] },
+  { title: "Settings", href: "/settings", icon: Settings, roles: routePermissions["/settings"], disabled: true },
 ];
