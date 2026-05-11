@@ -3,6 +3,7 @@ package com.temple.erp.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -15,11 +16,11 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    // Hardcoded static key for simplicity. In production, this should be in application.properties and injected via @Value
-    private static final String SECRET_KEY_STRING = "4qhq8LrEBfYcaRHxhdb9zURb2rf8e7Ud"; // At least 256-bit safe secret key
+    @Value("${jwt.secret:4qhq8LrEBfYcaRHxhdb9zURb2rf8e7Ud}")
+    private String secretKey;
 
     private SecretKey getSignKey() {
-        return Keys.hmacShaKeyFor(SECRET_KEY_STRING.getBytes());
+        return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
     public String extractUsername(String token) {
